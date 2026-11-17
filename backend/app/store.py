@@ -27,6 +27,9 @@ class Store:
             "proxy_assignments": [],   # 代理分配记录
             "cookie_rotations": [],    # 凭证轮换记录
             "scheduler_triggers": [],  # 调度触发记录
+            "std_parse_datasets": [],  # 原始采集页标准化解析数据集
+            "std_parse_results": [],   # 标准化解析字段结果与规则来源
+            "std_parse_batches": [],   # 标准化解析结果批次记录
         }
         self._load_joint()
 
@@ -102,6 +105,10 @@ class Store:
 
     def joint_clear(self, key: str) -> None:
         self._joint[key] = []
+        self._save_joint(key)
+
+    def joint_replace(self, key: str, rows: list[dict[str, Any]]) -> None:
+        self._joint[key] = rows
         self._save_joint(key)
 
     def joint_all(self) -> dict[str, list[dict[str, Any]]]:

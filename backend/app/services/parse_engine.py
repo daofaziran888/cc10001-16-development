@@ -1,12 +1,15 @@
 """解析引擎业务规则：状态流转、字段校验与筛选口径都收在这里。"""
 from __future__ import annotations
 
+import time
 from typing import Any
 
 from app.store import store
 
 MODULE = "parse_engine"
 LIST_FIELDS = ["配置编号", "页面类型", "引擎类型", "解析规则", "字符编码", "容错模式", "输出Schema", "版本号"]
+# 列表字段之外的协作字段：不参与筛选，但登记时必须保留，否则标准化解析无法按站点/引擎路由。
+EXTRA_FIELDS = ["目标站点"]
 REQUIRED_FIELDS = ["配置编号", "页面类型", "引擎类型"]
 STATUS_ORDER = ["草稿", "已验证", "已部署", "已停用"]
 ACTION_RULES = {"提交验证": "已验证", "部署上线": "已部署", "停用配置": "已停用"}
@@ -44,6 +47,7 @@ class ParseEngineService:
         rows = store.rows(MODULE)
         entry = {"id": max((int(row.get("id", 0)) for row in rows), default=0) + 1}
         entry.update({field: values.get(field) for field in LIST_FIELDS})
+        entry.update({field: values.get(field) for field in EXTRA_FIELDS})
         entry["status"] = STATUS_ORDER[0]
         entry["pending"] = True
         entry["abnormal"] = False
@@ -62,4 +66,7 @@ class ParseEngineService:
         entry["status"] = target
         entry["pending"] = target != STATUS_ORDER[-1]
         entry["abnormal"] = action in NEGATIVE_ACTIONS
+        if action == "部署上线":
+            # 部署时间决定同一字段冲突规则/配置版本的先后，必须随部署动作一起记录。
+            entry["部署时间"] = time.strftime("%Y-%m-%d %H:%M:%S")
         return entry, f"解析配置已{action}"

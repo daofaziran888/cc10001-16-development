@@ -19,6 +19,7 @@ const ExportHub = () => import('@/views/export_hub/index.vue')
 const Scheduler = () => import('@/views/scheduler/index.vue')
 const ParseEngine = () => import('@/views/parse_engine/index.vue')
 const RetryQueue = () => import('@/views/retry_queue/index.vue')
+const StdParse = () => import('@/views/std_parse/index.vue')
 
 const router = createRouter({
   history: createWebHistory(),
@@ -42,6 +43,7 @@ const router = createRouter({
     { path: '/scheduler', name: 'scheduler', component: Scheduler },
     { path: '/parse_engine', name: 'parse_engine', component: ParseEngine },
     { path: '/retry_queue', name: 'retry_queue', component: RetryQueue },
+    { path: '/std_parse', name: 'std_parse', component: StdParse },
   ],
 })
 

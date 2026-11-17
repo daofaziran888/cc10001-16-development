@@ -31,6 +31,12 @@ class QualityAuditor:
         raw = max(1, int(batch["id"]) * 50) if batch else 100
         valid = max(1, int(batch["id"]) * 45) if batch else 90
         checksum = str(batch.get("校验摘要", "") or "")
+        # 标准化解析批次带有真实行列数，按批次记录值审计，避免模拟值掩盖字段状态。
+        try:
+            raw = int(str(batch.get("原始行数", "")))
+            valid = int(str(batch.get("有效行数", "")))
+        except (TypeError, ValueError):
+            pass
 
         # 质量规则校验
         issues: list[str] = []
@@ -60,13 +66,18 @@ class QualityAuditor:
         if audit_entry is None:
             return {"ok": False, "error": f"审计记录写入失败：缺少 {missing}"}
 
-        # 写入联合存储表
+        # 写入联合存储表；标准化解析批次要把配置版本与规则来源一并带进审计链路。
         record = {
             "id": self._next_audit_id(),
             "batch_id": batch_id,
+            "batch_code": str(batch.get("批次编号", "")),
             "audit_entry_id": audit_entry["id"],
             "verdict": verdict,
             "issues": issues,
+            "config_code": str(batch.get("配置编号", "") or ""),
+            "config_version": str(batch.get("配置版本", "") or ""),
+            "rule_sources": str(batch.get("规则来源", "") or ""),
+            "field_status_counts": str(batch.get("字段状态分布", "") or ""),
             "audited_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         }
         store.joint_append("audit_records", record)

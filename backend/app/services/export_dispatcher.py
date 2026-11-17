@@ -49,9 +49,13 @@ class ExportDispatcher:
         log = {
             "id": self._next_log_id(),
             "batch_id": batch_id,
+            "batch_code": str(batch.get("批次编号", "")),
             "export_entry_id": export_entry["id"],
             "channel_format": channel_format,
             "target": export_values["目标地址"],
+            "config_code": str(batch.get("配置编号", "") or ""),
+            "config_version": str(batch.get("配置版本", "") or ""),
+            "rule_sources": str(batch.get("规则来源", "") or ""),
             "dispatched_at": time.strftime("%Y-%m-%d %H:%M:%S"),
             "status": "已启用",
         }

@@ -1,0 +1,301 @@
+[
+  {
+    "id": 1,
+    "dataset_id": 1,
+    "dataset_code": "DS-0001",
+    "batch_record_id": 1,
+    "result_batch_code": "STDP-2-3-1",
+    "raw_page_id": 2,
+    "page_code": "PAGE-0002",
+    "source_url": "https://shop.example.com/item/1002",
+    "target_site": "优选商城",
+    "page_type": "商品详情",
+    "field_name": "标题",
+    "field_path": "title",
+    "value": null,
+    "candidates": [],
+    "field_status": "缺失",
+    "conflict": false,
+    "config_id": 3,
+    "config_code": "PARS-0003",
+    "config_version": "v3",
+    "applied_rule_id": 3,
+    "applied_rule_code": "EXTR-0003",
+    "applied_rule_version": "r1",
+    "rule_hits": [
+      {
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_path": "*",
+        "rule_version": "r1",
+        "priority": 10,
+        "value": null,
+        "deployed_at": "2026-11-01 09:00:00",
+        "status": "命中"
+      }
+    ],
+    "validation": {
+      "passed": false,
+      "pattern": "",
+      "message": "必填字段在原始页面中缺失",
+      "expected_type": "string",
+      "required": true,
+      "default_used": false
+    },
+    "extracted_at": "2026-11-17 04:02:54"
+  },
+  {
+    "id": 2,
+    "dataset_id": 1,
+    "dataset_code": "DS-0001",
+    "batch_record_id": 1,
+    "result_batch_code": "STDP-2-3-1",
+    "raw_page_id": 2,
+    "page_code": "PAGE-0002",
+    "source_url": "https://shop.example.com/item/1002",
+    "target_site": "优选商城",
+    "page_type": "商品详情",
+    "field_name": "副标题",
+    "field_path": "subtitle",
+    "value": "限时特惠",
+    "candidates": [
+      {
+        "rule_id": 2,
+        "rule_code": "EXTR-0002",
+        "rule_version": "r3",
+        "priority": 20,
+        "value": "限时特惠",
+        "deployed_at": "2026-11-08 14:00:00"
+      },
+      {
+        "rule_id": 1,
+        "rule_code": "EXTR-0001",
+        "rule_version": "r2",
+        "priority": 20,
+        "value": "官方旗舰店专供",
+        "deployed_at": "2026-11-05 10:00:00"
+      }
+    ],
+    "field_status": "待确认",
+    "conflict": true,
+    "config_id": 3,
+    "config_code": "PARS-0003",
+    "config_version": "v3",
+    "applied_rule_id": 2,
+    "applied_rule_code": "EXTR-0002",
+    "applied_rule_version": "r3",
+    "rule_hits": [
+      {
+        "rule_id": 2,
+        "rule_code": "EXTR-0002",
+        "rule_path": "subtitle",
+        "rule_version": "r3",
+        "priority": 20,
+        "value": "限时特惠",
+        "deployed_at": "2026-11-08 14:00:00",
+        "status": "候选",
+        "note": "同优先级冲突，保留为候选值"
+      },
+      {
+        "rule_id": 1,
+        "rule_code": "EXTR-0001",
+        "rule_path": "subtitle",
+        "rule_version": "r2",
+        "priority": 20,
+        "value": "官方旗舰店专供",
+        "deployed_at": "2026-11-05 10:00:00",
+        "status": "候选",
+        "note": "同优先级冲突，保留为候选值"
+      }
+    ],
+    "validation": {
+      "passed": false,
+      "pattern": "",
+      "message": "存在同优先级冲突候选，字段待人工确认",
+      "expected_type": "string",
+      "required": false,
+      "default_used": false
+    },
+    "extracted_at": "2026-11-17 04:02:54"
+  },
+  {
+    "id": 3,
+    "dataset_id": 1,
+    "dataset_code": "DS-0001",
+    "batch_record_id": 1,
+    "result_batch_code": "STDP-2-3-1",
+    "raw_page_id": 2,
+    "page_code": "PAGE-0002",
+    "source_url": "https://shop.example.com/item/1002",
+    "target_site": "优选商城",
+    "page_type": "商品详情",
+    "field_name": "价格",
+    "field_path": "price",
+    "value": 89.9,
+    "candidates": [],
+    "field_status": "已解析",
+    "conflict": false,
+    "config_id": 3,
+    "config_code": "PARS-0003",
+    "config_version": "v3",
+    "applied_rule_id": 3,
+    "applied_rule_code": "EXTR-0003",
+    "applied_rule_version": "r1",
+    "rule_hits": [
+      {
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_path": "*",
+        "rule_version": "r1",
+        "priority": 10,
+        "value": 89.9,
+        "deployed_at": "2026-11-01 09:00:00",
+        "status": "命中"
+      }
+    ],
+    "validation": {
+      "passed": true,
+      "pattern": "",
+      "message": "校验通过",
+      "expected_type": "number",
+      "required": true,
+      "default_used": false
+    },
+    "extracted_at": "2026-11-17 04:02:54"
+  },
+  {
+    "id": 4,
+    "dataset_id": 1,
+    "dataset_code": "DS-0001",
+    "batch_record_id": 1,
+    "result_batch_code": "STDP-2-3-1",
+    "raw_page_id": 2,
+    "page_code": "PAGE-0002",
+    "source_url": "https://shop.example.com/item/1002",
+    "target_site": "优选商城",
+    "page_type": "商品详情",
+    "field_name": "店铺",
+    "field_path": "shop.name",
+    "value": "日用优选",
+    "candidates": [],
+    "field_status": "已解析",
+    "conflict": false,
+    "config_id": 3,
+    "config_code": "PARS-0003",
+    "config_version": "v3",
+    "applied_rule_id": 3,
+    "applied_rule_code": "EXTR-0003",
+    "applied_rule_version": "r1",
+    "rule_hits": [
+      {
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_path": "*",
+        "rule_version": "r1",
+        "priority": 10,
+        "value": "日用优选",
+        "deployed_at": "2026-11-01 09:00:00",
+        "status": "命中"
+      }
+    ],
+    "validation": {
+      "passed": true,
+      "pattern": "",
+      "message": "校验通过",
+      "expected_type": "string",
+      "required": false,
+      "default_used": false
+    },
+    "extracted_at": "2026-11-17 04:02:54"
+  },
+  {
+    "id": 5,
+    "dataset_id": 1,
+    "dataset_code": "DS-0001",
+    "batch_record_id": 1,
+    "result_batch_code": "STDP-2-3-1",
+    "raw_page_id": 2,
+    "page_code": "PAGE-0002",
+    "source_url": "https://shop.example.com/item/1002",
+    "target_site": "优选商城",
+    "page_type": "商品详情",
+    "field_name": "库存",
+    "field_path": "stock",
+    "value": "充足",
+    "candidates": [],
+    "field_status": "校验失败",
+    "conflict": false,
+    "config_id": 3,
+    "config_code": "PARS-0003",
+    "config_version": "v3",
+    "applied_rule_id": 3,
+    "applied_rule_code": "EXTR-0003",
+    "applied_rule_version": "r1",
+    "rule_hits": [
+      {
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_path": "*",
+        "rule_version": "r1",
+        "priority": 10,
+        "value": "充足",
+        "deployed_at": "2026-11-01 09:00:00",
+        "status": "命中"
+      }
+    ],
+    "validation": {
+      "passed": false,
+      "pattern": "",
+      "message": "值「充足」不是整数",
+      "expected_type": "integer",
+      "required": false,
+      "default_used": false
+    },
+    "extracted_at": "2026-11-17 04:02:54"
+  },
+  {
+    "id": 6,
+    "dataset_id": 1,
+    "dataset_code": "DS-0001",
+    "batch_record_id": 1,
+    "result_batch_code": "STDP-2-3-1",
+    "raw_page_id": 2,
+    "page_code": "PAGE-0002",
+    "source_url": "https://shop.example.com/item/1002",
+    "target_site": "优选商城",
+    "page_type": "商品详情",
+    "field_name": "描述",
+    "field_path": "description",
+    "value": "暂无描述",
+    "candidates": [],
+    "field_status": "已解析",
+    "conflict": false,
+    "config_id": 3,
+    "config_code": "PARS-0003",
+    "config_version": "v3",
+    "applied_rule_id": 3,
+    "applied_rule_code": "EXTR-0003",
+    "applied_rule_version": "r1",
+    "rule_hits": [
+      {
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_path": "*",
+        "rule_version": "r1",
+        "priority": 10,
+        "value": null,
+        "deployed_at": "2026-11-01 09:00:00",
+        "status": "命中"
+      }
+    ],
+    "validation": {
+      "passed": true,
+      "pattern": "",
+      "message": "原始字段缺失，使用缺省值",
+      "expected_type": "string",
+      "required": false,
+      "default_used": true
+    },
+    "extracted_at": "2026-11-17 04:02:54"
+  }
+]

@@ -1,0 +1,95 @@
+[
+  {
+    "id": 1,
+    "batch_id": 1,
+    "批次编号": "STDP-2-3-1",
+    "dataset_id": 1,
+    "dataset_code": "DS-0001",
+    "raw_page_id": 2,
+    "config_id": 3,
+    "config_code": "PARS-0003",
+    "config_version": "v3",
+    "conflict_policy": "candidates",
+    "total_fields": 6,
+    "field_status_counts": {
+      "已解析": 3,
+      "待确认": 1,
+      "校验失败": 1,
+      "缺失": 1,
+      "缺规则": 0
+    },
+    "pending_fields": 1,
+    "failed_fields": 2,
+    "conflict_fields": 1,
+    "rule_sources": [
+      {
+        "field_path": "title",
+        "field_name": "标题",
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_version": "r1",
+        "priority": 10,
+        "status": "命中"
+      },
+      {
+        "field_path": "subtitle",
+        "field_name": "副标题",
+        "rule_id": 2,
+        "rule_code": "EXTR-0002",
+        "rule_version": "r3",
+        "priority": 20,
+        "status": "候选"
+      },
+      {
+        "field_path": "subtitle",
+        "field_name": "副标题",
+        "rule_id": 1,
+        "rule_code": "EXTR-0001",
+        "rule_version": "r2",
+        "priority": 20,
+        "status": "候选"
+      },
+      {
+        "field_path": "price",
+        "field_name": "价格",
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_version": "r1",
+        "priority": 10,
+        "status": "命中"
+      },
+      {
+        "field_path": "shop.name",
+        "field_name": "店铺",
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_version": "r1",
+        "priority": 10,
+        "status": "命中"
+      },
+      {
+        "field_path": "stock",
+        "field_name": "库存",
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_version": "r1",
+        "priority": 10,
+        "status": "命中"
+      },
+      {
+        "field_path": "description",
+        "field_name": "描述",
+        "rule_id": 3,
+        "rule_code": "EXTR-0003",
+        "rule_version": "r1",
+        "priority": 10,
+        "status": "命中"
+      }
+    ],
+    "规则来源": "EXTR-0001@r2(候选: subtitle); EXTR-0002@r3(候选: subtitle); EXTR-0003@r1(命中: title、price、shop.name、stock、description)",
+    "result_batch_id": 3,
+    "result_batch_code": "STDP-2-3-1",
+    "status": "待确认",
+    "created_at": "2026-11-17 04:02:54"
+  }
+]

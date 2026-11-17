@@ -1,12 +1,15 @@
 """抽取模板业务规则：状态流转、字段校验与筛选口径都收在这里。"""
 from __future__ import annotations
 
+import time
 from typing import Any
 
 from app.store import store
 
 MODULE = "extract_rule"
 LIST_FIELDS = ["规则编号", "目标站点", "页面类型", "字段路径", "提取方式", "缺省值", "校验正则", "规则优先级"]
+# 规则版本与部署时间用于冲突裁决和结果追溯，列表不展示但要随登记保存。
+EXTRA_FIELDS = ["规则版本", "提取表达式"]
 REQUIRED_FIELDS = ["规则编号", "目标站点", "页面类型"]
 STATUS_ORDER = ["草稿", "校验中", "已发布", "已废弃"]
 ACTION_RULES = {"提交校验": "校验中", "发布规则": "已发布", "废弃规则": "已废弃"}
@@ -44,6 +47,7 @@ class ExtractRuleService:
         rows = store.rows(MODULE)
         entry = {"id": max((int(row.get("id", 0)) for row in rows), default=0) + 1}
         entry.update({field: values.get(field) for field in LIST_FIELDS})
+        entry.update({field: values.get(field) for field in EXTRA_FIELDS})
         entry["status"] = STATUS_ORDER[0]
         entry["pending"] = True
         entry["abnormal"] = False
@@ -62,4 +66,7 @@ class ExtractRuleService:
         entry["status"] = target
         entry["pending"] = target != STATUS_ORDER[-1]
         entry["abnormal"] = action in NEGATIVE_ACTIONS
+        if action == "发布规则":
+            # 冲突裁决按最新部署版本，发布时间是裁决依据，发布时必须写入。
+            entry["部署时间"] = time.strftime("%Y-%m-%d %H:%M:%S")
         return entry, f"抽取规则已{action}"
